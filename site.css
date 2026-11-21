@@ -172,3 +172,34 @@ a.ribbon:hover{filter:brightness(1.08)}
 
 /* סימן השקל: גופן מערכת, כדי שיוצג ₪ ולא ש"ח */
 .nis{font-family:Arial,"Helvetica Neue",system-ui,sans-serif;font-weight:700;margin-inline-start:1px}
+
+/* ===== טלפון: שני ספרים בשורה וכרטיסים קומפקטיים, כדי שהגלילה לא תהיה ארוכה מדי ===== */
+@media (max-width:600px){
+  :root{--bookw:88px;--bookh:150px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 12px;margin-top:26px}
+  .book .shelf{height:178px;padding-bottom:28px}
+  .book .body{margin-top:-16px;padding:0 10px 38px;border-radius:16px}
+  .ribbon{font-size:15px;line-height:1.25;padding:6px 6px;margin:0 -4px;transform:translateY(-10px)}
+  .ribbon.en{font-size:13px}
+  .desc{font-size:13.5px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .order{font-size:13px;margin-top:8px}
+  .tag{font-size:15px;padding:4px 10px;bottom:-12px;inset-inline-end:-6px;border-radius:8px}
+  .tag small{font-size:11px}
+  .tag.ask{font-size:12px}
+  .series{margin-top:30px}
+  .series .shelf{height:150px;padding-bottom:30px}
+  .series .body{padding:0 16px 22px}
+  .series .body p{font-size:14px}
+  .cat{padding-top:34px}
+  .cat-title{padding:8px 28px 10px}
+  .cat-intro{font-size:14.5px}
+  /* המומלצים: מדף גלילה עם כרטיסים צרים יותר */
+  .grid.feat-grid .book{flex:0 0 58%}
+  .featured{padding-top:30px}
+  /* הפתיח: הכפתורים בשתי עמודות */
+  .hero{padding:24px 16px 100px}
+  .hero-body{padding:20px 16px}
+  .quote{font-size:15px}
+  .cta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+  .cta .btn{font-size:14.5px;padding:10px 8px}
+}
