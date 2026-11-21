@@ -8,7 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=Suez+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=3">
+<link rel="stylesheet" href="site.css?v=4">
+<script src="a11y.js?v=1"></script>
 </head>
 <body>
 
@@ -48,7 +49,7 @@
   <div class="mbar" id="mbar"><button type="button" id="mbar-btn" aria-expanded="false"><span id="mbar-label">מומלצים</span><small>כל הקטגוריות ▾</small></button><div class="list hidden" id="mbar-list"></div></div>
 
   <div class="tools">
-    <input class="search" id="q" type="search" placeholder="חיפוש ספר: תניא, אהבת ישראל, תפילין…">
+    <input class="search" id="q" type="search" aria-label="חיפוש ספר" placeholder="חיפוש ספר: תניא, אהבת ישראל, תפילין…">
     <label class="toggle"><input type="checkbox" id="instock"> רק ספרים שבמלאי</label>
     <span class="count" id="count"></span>
   </div>
@@ -85,8 +86,8 @@ function bookHTML(b, en){
               : b.back ? '<span class="badge back">חזר<br>למלאי</span>' : "";
   return '<article class="book' + (b.price === "sold" ? ' is-sold' : '') + '" data-q="' + esc(b.name + " " + b.desc) + '" data-sold="' + (b.price === "sold") + '">'
     + '<a class="shelf" href="' + url + '"><img loading="lazy" style="width:' + (b.wide ? '100%' : 'calc(var(--bookw) * ' + (IMG_R[b.img] || 1) + ')') + '" src="covers/' + b.img + '.png?v=' + IMG_V + '" alt="' + esc(b.name) + '">' + badge + '</a>'
-    + '<div class="body"><a class="ribbon' + (en ? ' en' : '') + '" href="' + url + '">' + esc(b.name) + '</a>'
-    + '<p class="desc' + (en ? ' en' : '') + '">' + esc(b.desc) + '</p>' + moreLink(url, b) + priceTag(b) + '</div></article>';
+    + '<div class="body"><a class="ribbon' + (en ? ' en" lang="en' : '') + '" href="' + url + '">' + esc(b.name) + '</a>'
+    + '<p class="desc' + (en ? ' en" lang="en' : '') + '">' + esc(b.desc) + '</p>' + moreLink(url, b) + priceTag(b) + '</div></article>';
 }
 function seriesHTML(s){
   return '<div class="series" data-q="' + esc(s.name + " " + s.desc) + '" data-sold="false">'

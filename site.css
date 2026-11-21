@@ -2,14 +2,14 @@
 :root{
   --paper:#eeedeb;
   --white:#ffffff;
-  --blue-1:#1b9ab8;   /* טורקיז של הפס העליון */
+  --blue-1:#1279a8;   /* טורקיז של הפס העליון */
   --blue-2:#1666a8;   /* כחול עמוק של הפס העליון */
   --title:#1c4f9c;    /* כחול הכותרות */
-  --ribbon:#168aa6;   /* סרט שם הספר */
+  --ribbon:#127a93;   /* סרט שם הספר */
   --ink:#1d2433;
   --muted:#5b6475;
   --price:#f3b552;
-  --sold:#f04b3a;
+  --sold:#d63a29;
   --radius:22px;
   --shadow:0 10px 30px rgba(20,40,80,.08);
 }
@@ -49,7 +49,7 @@ a{color:inherit}
 .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
 .btn{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;text-decoration:none;font-weight:800;padding:12px 24px;border-radius:999px;font-size:17px}
 .btn-blue{background:linear-gradient(100deg,var(--blue-2),var(--blue-1));color:#fff}
-.btn-wa{background:#22b45a;color:#fff}
+.btn-wa{background:#178244;color:#fff}
 .btn-ghost{background:#fff;color:var(--blue-2);border:2px solid var(--blue-2)}
 
 /* ===== סרגל סינון ===== */
@@ -202,4 +202,10 @@ a.ribbon:hover{filter:brightness(1.08)}
   .quote{font-size:15px}
   .cta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
   .cta .btn{font-size:14.5px;padding:10px 8px}
+}
+
+/* טלפון: בלי כפתורים בפתיח. הטלפון כבר בפס העליון, והספרים מתחילים מיד אחרי הפתיח */
+@media (max-width:600px){
+  .hero-card .cta{display:none}
+  .hero-body{padding-bottom:22px}
 }

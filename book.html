@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=Suez+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=3">
+<link rel="stylesheet" href="site.css?v=4">
 <style>
 /* עמוד ספר */
 .crumbs{max-width:1200px;margin:26px auto 0;padding:0 20px;font-size:15px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
@@ -81,6 +81,7 @@
   .related .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 </style>
+<script src="a11y.js?v=1"></script>
 </head>
 <body>
 
@@ -117,8 +118,8 @@ function cardHTML(x){
   const url = bookUrl(x), en = x.cat.en;
   return '<article class="book' + (x.price === "sold" ? ' is-sold' : '') + '">'
     + '<a class="shelf" href="' + url + '"><img loading="lazy" style="width:' + (x.isSeries ? '100%' : 'calc(var(--bookw) * ' + (IMG_R[x.img] || 1) + ')') + '" src="covers/' + x.img + '.png?v=' + IMG_V + '" alt="' + esc(x.name) + '"></a>'
-    + '<div class="body"><a class="ribbon' + (en ? ' en' : '') + '" href="' + url + '">' + esc(x.name) + '</a>'
-    + '<p class="desc' + (en ? ' en' : '') + '">' + esc(x.desc) + '</p>'
+    + '<div class="body"><a class="ribbon' + (en ? ' en" lang="en' : '') + '" href="' + url + '">' + esc(x.name) + '</a>'
+    + '<p class="desc' + (en ? ' en" lang="en' : '') + '">' + esc(x.desc) + '</p>'
     + '<a class="order" href="' + url + '">לפרטים ←</a>' + priceTag(x) + '</div></article>';
 }
 
@@ -145,11 +146,11 @@ if (!b) {
     + '<div class="pdp-cover"><img style="width:' + coverW + '" src="covers/' + b.img + '.png?v=' + IMG_V + '" alt="' + esc(b.name) + '"></div>'
     + '<div class="pdp-info">'
     +   '<a class="chip" href="index.html#' + b.cat.id + '">' + esc(short(b.cat)) + '</a>'
-    +   '<h1' + (en ? ' class="en"' : '') + '>' + esc(b.name) + '</h1>'
+    +   '<h1' + (en ? ' class="en" lang="en"' : '') + '>' + esc(b.name) + '</h1>'
     +   '<div class="author">הרב יקותיאל גרין ע"ה</div>'
     +   (flags ? '<div class="flags">' + flags + '</div>' : '')
     +   priceHTML
-    +   '<p class="pdp-desc' + (en ? ' en' : '') + '">' + esc(b.desc) + '</p>'
+    +   '<p class="pdp-desc' + (en ? ' en" lang="en' : '') + '">' + esc(b.desc) + '</p>'
     +   '<div class="buy" id="buy"></div>'
     + '</div>'
     + '</div></main>';
