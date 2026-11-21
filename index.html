@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>חסידות לעם · ספרי הרב יקותיאל גרין</title>
+<meta name="description" content="קטלוג ספרי הרב יקותיאל גרין ע&quot;ה: באור משכיל לאיתן על התניא, סדרת המאמרים המבוארים, אהבת ישראל, חינוך, תניא לילדים וספרים באנגלית. להשגת הספרים: 054-6398851">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=Suez+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=2">
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="logo" href="#"><img src="img/logo.png" alt="חסידות לעם · ספרי הרב גרין"></a>
+    <nav class="nav" id="nav"></nav>
+    <a class="phone" href="tel:0546398851">054-6398851</a>
+  </div>
+</header>
+
+<section class="hero">
+  <small>חסידות לעם · ספרי הרב גרין</small>
+</section>
+<div style="padding:0 20px">
+  <div class="hero-card">
+    <div class="hero-body">
+    <h1>ספרי הרב יקותיאל גרין ע"ה</h1>
+    <div class="sub">באור משכיל לאיתן · מאמרים מבוארים · חינוך</div>
+    <p class="quote">בסיום כתיבת הכרך האחרון כתב הרב: <b>"בעזרת ה' יתברך, נשלמה סדרת באור התניא 'משכיל לאיתן', שנכתב בהוראתו הישירה של הרבי וברכתו, ובו באור יסודי השוה לכל נפש."</b></p>
+    <div class="cta">
+      <a class="btn btn-blue" href="#catalog">לכל הספרים</a>
+      <a class="btn btn-ghost" href="about.html">על הרב גרין</a>
+      <a class="btn btn-wa" id="wa-main" href="#">הזמנה בוואטסאפ</a>
+      <a class="btn btn-ghost" href="tel:0546398851">חיוג: 054-6398851</a>
+    </div>
+    </div>
+    <figure class="hero-photo" style="margin:0">
+      <img src="about/series.jpg" alt="הרב יקותיאל גרין ע&quot;ה עם סדרת משכיל לאיתן">
+      <figcaption>הרב יקותיאל גרין ע"ה</figcaption>
+    </figure>
+  </div>
+</div>
+
+<div class="layout" id="catalog">
+<div class="content">
+  <div class="mbar" id="mbar"><button type="button" id="mbar-btn" aria-expanded="false"><span id="mbar-label">מומלצים</span><small>כל הקטגוריות ▾</small></button><div class="list hidden" id="mbar-list"></div></div>
+
+  <div class="tools">
+    <input class="search" id="q" type="search" placeholder="חיפוש ספר: תניא, אהבת ישראל, תפילין…">
+    <label class="toggle"><input type="checkbox" id="instock"> רק ספרים שבמלאי</label>
+    <span class="count" id="count"></span>
+  </div>
+
+  <section class="featured" id="featured">
+    <div class="feat-title"><span>★</span><h2>מומלצים</h2><span>★</span></div>
+    <div class="grid feat-grid" id="feat-grid"></div>
+  </section>
+
+  <main id="cats"></main>
+  <div class="empty hidden" id="empty">לא נמצא ספר כזה. אפשר להתקשר ולשאול: 054-6398851</div>
+</div>
+</div>
+
+<footer class="foot">
+  <div class="pill">
+    <span class="label">להשגת הספרים: "חסידות לעם"</span>
+    <a class="num" href="tel:0546398851">054-6398851</a>
+  </div>
+  <p>הספרים שמסומנים "אזל" אינם במלאי כרגע. אפשר להתקשר ולברר אם צפויה הדפסה חוזרת.</p>
+  <p><a href="about.html">על הרב יקותיאל גרין ע"ה, ועל הדרך שבה נכתבו הספרים</a></p>
+</footer>
+
+<script src="data.js?v=5"></script>
+<script src="lib.js?v=1"></script>
+<script>
+// הכרטיס מוביל לעמוד הספר, ושם נמצאות ההזמנה (ובהמשך גם התשלום)
+const moreLink = (url, b) => '<a class="order" href="' + url + '">' + (b.price === "sold" ? "לפרטים ולבירור על הדפסה חוזרת" : "לפרטים ולהזמנה") + ' ←</a>';
+function bookHTML(b, en){
+  const url = b.link || bookUrl(b);
+  // התגיות "חדש!" ו"חזר למלאי" כבר מופיעות בתמונות שנחתכו מהקטלוג. מוסיפים תגית רק כשהיא לא בתמונה (noBadgeInImg)
+  const badge = !b.noBadgeInImg ? ""
+              : b.isNew ? '<span class="badge new">חדש!</span>'
+              : b.back ? '<span class="badge back">חזר<br>למלאי</span>' : "";
+  return '<article class="book' + (b.price === "sold" ? ' is-sold' : '') + '" data-q="' + esc(b.name + " " + b.desc) + '" data-sold="' + (b.price === "sold") + '">'
+    + '<a class="shelf" href="' + url + '"><img loading="lazy" style="width:' + (b.wide ? '100%' : 'calc(var(--bookw) * ' + (IMG_R[b.img] || 1) + ')') + '" src="covers/' + b.img + '.png?v=' + IMG_V + '" alt="' + esc(b.name) + '">' + badge + '</a>'
+    + '<div class="body"><a class="ribbon' + (en ? ' en' : '') + '" href="' + url + '">' + esc(b.name) + '</a>'
+    + '<p class="desc' + (en ? ' en' : '') + '">' + esc(b.desc) + '</p>' + moreLink(url, b) + priceTag(b) + '</div></article>';
+}
+function seriesHTML(s){
+  return '<div class="series" data-q="' + esc(s.name + " " + s.desc) + '" data-sold="false">'
+    + '<a class="shelf" href="' + bookUrl(s) + '"><img loading="lazy" src="covers/' + s.img + '.png?v=' + IMG_V + '" alt="' + esc(s.name) + '"></a>'
+    + '<div class="body" style="position:relative"><a class="ribbon" href="' + bookUrl(s) + '">' + esc(s.name) + '</a>'
+    + (s.desc ? '<p>' + esc(s.desc) + '</p>' : '') + '<div style="margin-top:12px">' + moreLink(bookUrl(s), s) + '</div>' + priceTag(s) + '</div></div>';
+}
+
+document.getElementById("cats").innerHTML = CATS.map(c =>
+  '<section class="cat" id="' + c.id + '"><div class="cat-title"><h2>' + c.title + '</h2></div>'
+  + (c.intro ? '<p class="cat-intro">' + c.intro + '</p>' : '')
+  + (c.series ? '<div class="series-row">' + c.series.map(seriesHTML).join("") + '</div>' : "")
+  + '<div class="grid">' + c.books.map(b => bookHTML(b, c.en)).join("") + '</div></section>'
+).join("");
+// מדף המומלצים: הספרים ב-FEATURED (data.js), ובראשו סדרת משכיל לאיתן (הפריט של לקוטי אמרים, עם המחיר שלו)
+// לסדרה מציגים את ערימת שלושת הכרכים של שער היחוד, כי ערימת שבעת הכרכים נמוכה מדי במדף
+document.getElementById("feat-grid").innerHTML = FEATURED.map(img => {
+  const b = findItem(img);
+  if (!b) return "";
+  return img === "likutei"
+    ? bookHTML({ ...b, img:"shaar", link:bookUrl(b), name:"משכיל לאיתן", desc:"באור על התניא, 22 כרכים. לקוטי אמרים, שער היחוד והאמונה, אגרת התשובה, אגרת הקודש וקונטרס אחרון.", wide:true })
+    : bookHTML(b.isSeries ? { ...b, wide:true } : b);
+}).join("");
+// תפריט הקטגוריות: בפס העליון במחשב, ובפס הדק בטלפון. אותם קישורים בשניהם
+const SECTIONS = [{ id:"featured", title:"★ מומלצים" }, ...CATS.map(c => ({ id:c.id, title:short(c) }))];
+const links = SECTIONS.map(x => '<a href="#' + x.id + '" data-id="' + x.id + '">' + x.title + '</a>').join("");
+document.getElementById("nav").innerHTML = links + '<a class="about-link" href="about.html">על הרב גרין</a>';
+document.getElementById("mbar-list").innerHTML = links;
+const mbarBtn = document.getElementById("mbar-btn"), mbarList = document.getElementById("mbar-list");
+const toggleList = open => { mbarList.classList.toggle("hidden", !open); mbarBtn.setAttribute("aria-expanded", open); };
+mbarBtn.addEventListener("click", () => toggleList(mbarList.classList.contains("hidden")));
+document.querySelectorAll("#nav a[data-id], #mbar-list a").forEach(a => a.addEventListener("click", e => {
+  e.preventDefault();
+  history.replaceState(null, "", "#" + a.dataset.id);
+  document.getElementById(a.dataset.id).scrollIntoView();
+  toggleList(false);
+}));
+document.addEventListener("click", e => { if (!e.target.closest("#mbar")) toggleList(false); });
+// מסמנים את הקטגוריה שהמבקר נמצא בה עכשיו
+function markCurrent(){
+  // הקו שמתחתיו נחשבת קטגוריה "נוכחית": מתחת לפס העליון, ובטלפון גם מתחת לפס הקטגוריות
+  const line = (parseInt(getComputedStyle(document.documentElement).getPropertyValue("--top-h")) || 76) + (innerWidth <= 1340 ? 200 : 60);
+  let cur = null;
+  for (const x of SECTIONS) {
+    const el = document.getElementById(x.id);
+    if (el.classList.contains("hidden")) continue;
+    if (!cur || el.getBoundingClientRect().top <= line) cur = x; else break;
+  }
+  document.querySelectorAll("#nav a[data-id], #mbar-list a").forEach(a => a.classList.toggle("on", !!cur && a.dataset.id === cur.id));
+  if (cur) document.getElementById("mbar-label").textContent = cur.title;
+}
+let ticking = false;
+window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { markCurrent(); ticking = false; }); } }, { passive:true });
+document.getElementById("wa-main").href = wa("שלום, אשמח לקבל פרטים על ספרי הרב גרין");
+
+const q = document.getElementById("q"), stock = document.getElementById("instock");
+function filter(){
+  const term = q.value.trim().toLowerCase(); let shown = 0, total = 0;
+  // בזמן חיפוש או סינון מסתירים את המומלצים, כדי שספר לא יופיע פעמיים
+  document.getElementById("featured").classList.toggle("hidden", !!term || stock.checked);
+  document.querySelectorAll(".cat").forEach(sec => {
+    let any = false;
+    sec.querySelectorAll(".book,.series").forEach(el => {
+      const ok = (!term || el.dataset.q.toLowerCase().includes(term)) && !(stock.checked && el.dataset.sold === "true");
+      el.classList.toggle("hidden", !ok);
+      if (el.classList.contains("book")) { total++; if (ok) shown++; }
+      if (ok) any = true;
+    });
+    sec.classList.toggle("hidden", !any);
+  });
+  document.querySelectorAll("#nav a[data-id], #mbar-list a").forEach(a => a.classList.toggle("off", document.getElementById(a.dataset.id).classList.contains("hidden")));
+  markCurrent();
+  document.getElementById("count").textContent = shown + " מתוך " + total + " ספרים";
+  document.getElementById("empty").classList.toggle("hidden", shown > 0);
+}
+q.addEventListener("input", filter); stock.addEventListener("change", filter);
+// גובה הפס העליון, כדי שהגלילה לקטלוג לא תיעצר מתחתיו
+const setTop = () => document.documentElement.style.setProperty("--top-h", document.querySelector(".top").offsetHeight + "px");
+setTop(); window.addEventListener("resize", setTop);
+filter();
+// קישור ישיר לקטגוריה (#english): הקטגוריות נבנות ב-JS, ולכן גוללים אליהן רק אחרי הבנייה
+const target = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
+if (target) target.scrollIntoView();
+</script>
+</body>
+</html>
