@@ -8,8 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=Suez+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=4">
+<link rel="stylesheet" href="site.css?v=5">
 <script src="a11y.js?v=1"></script>
+<script src="menu.js?v=2"></script>
 </head>
 <body>
 
@@ -46,7 +47,6 @@
 
 <div class="layout" id="catalog">
 <div class="content">
-  <div class="mbar" id="mbar"><button type="button" id="mbar-btn" aria-expanded="false"><span id="mbar-label">מומלצים</span><small>כל הקטגוריות ▾</small></button><div class="list hidden" id="mbar-list"></div></div>
 
   <div class="tools">
     <input class="search" id="q" type="search" aria-label="חיפוש ספר" placeholder="חיפוש ספר: תניא, אהבת ישראל, תפילין…">
@@ -111,21 +111,15 @@ document.getElementById("feat-grid").innerHTML = FEATURED.map(img => {
     ? bookHTML({ ...b, img:"shaar", link:bookUrl(b), name:"משכיל לאיתן", desc:"באור על התניא, 22 כרכים. לקוטי אמרים, שער היחוד והאמונה, אגרת התשובה, אגרת הקודש וקונטרס אחרון.", wide:true })
     : bookHTML(b.isSeries ? { ...b, wide:true } : b);
 }).join("");
-// תפריט הקטגוריות: בפס העליון במחשב, ובפס הדק בטלפון. אותם קישורים בשניהם
+// תפריט הקטגוריות בפס העליון (במחשב). במסך צר הן בתפריט ההמבורגר (menu.js)
 const SECTIONS = [{ id:"featured", title:"★ מומלצים" }, ...CATS.map(c => ({ id:c.id, title:short(c) }))];
 const links = SECTIONS.map(x => '<a href="#' + x.id + '" data-id="' + x.id + '">' + x.title + '</a>').join("");
 document.getElementById("nav").innerHTML = links + '<a class="about-link" href="about.html">על הרב גרין</a>';
-document.getElementById("mbar-list").innerHTML = links;
-const mbarBtn = document.getElementById("mbar-btn"), mbarList = document.getElementById("mbar-list");
-const toggleList = open => { mbarList.classList.toggle("hidden", !open); mbarBtn.setAttribute("aria-expanded", open); };
-mbarBtn.addEventListener("click", () => toggleList(mbarList.classList.contains("hidden")));
-document.querySelectorAll("#nav a[data-id], #mbar-list a").forEach(a => a.addEventListener("click", e => {
+document.querySelectorAll("#nav a[data-id]").forEach(a => a.addEventListener("click", e => {
   e.preventDefault();
   history.replaceState(null, "", "#" + a.dataset.id);
   document.getElementById(a.dataset.id).scrollIntoView();
-  toggleList(false);
 }));
-document.addEventListener("click", e => { if (!e.target.closest("#mbar")) toggleList(false); });
 // מסמנים את הקטגוריה שהמבקר נמצא בה עכשיו
 function markCurrent(){
   // הקו שמתחתיו נחשבת קטגוריה "נוכחית": מתחת לפס העליון, ובטלפון גם מתחת לפס הקטגוריות
@@ -136,8 +130,7 @@ function markCurrent(){
     if (el.classList.contains("hidden")) continue;
     if (!cur || el.getBoundingClientRect().top <= line) cur = x; else break;
   }
-  document.querySelectorAll("#nav a[data-id], #mbar-list a").forEach(a => a.classList.toggle("on", !!cur && a.dataset.id === cur.id));
-  if (cur) document.getElementById("mbar-label").textContent = cur.title;
+  document.querySelectorAll("#nav a[data-id], #menu-cats a").forEach(a => a.classList.toggle("on", !!cur && a.dataset.id === cur.id));
 }
 let ticking = false;
 window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { markCurrent(); ticking = false; }); } }, { passive:true });
@@ -158,7 +151,7 @@ function filter(){
     });
     sec.classList.toggle("hidden", !any);
   });
-  document.querySelectorAll("#nav a[data-id], #mbar-list a").forEach(a => a.classList.toggle("off", document.getElementById(a.dataset.id).classList.contains("hidden")));
+  document.querySelectorAll("#nav a[data-id], #menu-cats a").forEach(a => a.classList.toggle("off", document.getElementById(a.dataset.id).classList.contains("hidden")));
   markCurrent();
   document.getElementById("count").textContent = shown + " מתוך " + total + " ספרים";
   document.getElementById("empty").classList.toggle("hidden", shown > 0);
