@@ -84,6 +84,11 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px;text-align:center}
 .btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;padding:12px 26px;border-radius:999px;font-size:17px}
 .btn-blue{background:linear-gradient(100deg,var(--blue-2),var(--blue-1));color:#fff}
 .btn-ghost{background:#fff;color:var(--blue-2);border:2px solid var(--blue-2)}
+.btn{transition:transform .15s,box-shadow .15s}
+.btn-lg{padding:15px 32px;font-size:18px;min-width:220px;justify-content:center;box-shadow:0 8px 20px rgba(20,60,120,.16)}
+.btn-ghost.btn-lg{box-shadow:none}
+.btn-lg:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(20,60,120,.22)}
+@media (max-width:600px){.closing .cta{flex-direction:column;align-items:stretch}.btn-lg{min-width:0}}
 .closing{text-align:center}
 .closing p{font-size:20px}
 
@@ -249,8 +254,8 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px;text-align:center}
     <div class="card">
       <p>הספרים שלו ממשיכים ללמד, בבתים, בשיעורים ובקבוצות "היום בתניא", בדיוק בכיוון שהרבי כתב לו: <b>"ויוסיף בכיוון זה"</b>.</p>
       <div class="cta">
-        <a class="btn btn-blue" href="index.html">לכל הספרים</a>
-        <a class="btn btn-ghost" href="index.html#tanya">לסדרת משכיל לאיתן</a>
+        <a class="btn btn-blue btn-lg" href="index.html"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zm0 0A2 2 0 0 0 6 22h13"/></svg>לכל הספרים</a>
+        <a class="btn btn-ghost btn-lg" href="index.html#tanya">לסדרת משכיל לאיתן</a>
       </div>
     </div>
   </section>
