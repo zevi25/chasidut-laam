@@ -8,10 +8,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=Suez+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=6">
+<link rel="stylesheet" href="site.css?v=7">
 <style>
 /* עמוד ספר */
-.crumbs{max-width:1200px;margin:26px auto 0;padding:0 20px;font-size:15px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.crumbs{max-width:1200px;margin:26px auto 0;padding:0 20px;font-size:0.9375rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .crumbs a{color:var(--blue-2);font-weight:700;text-decoration:none}
 .crumbs a:hover{text-decoration:underline}
 
@@ -20,57 +20,58 @@
 /* הכריכה בצד ימין, ובטלפון מעל הפרטים */
 .pdp-cover{background:linear-gradient(160deg,#f6f5f3,#e7e6e3);display:flex;align-items:center;justify-content:center;padding:46px 30px;min-height:460px}
 .pdp-cover img{max-width:100%;height:auto;filter:drop-shadow(0 18px 22px rgba(0,0,0,.22))}
-.pdp-info{padding:38px 42px;display:flex;flex-direction:column;gap:14px}
-.chip{align-self:flex-start;background:#e8f4f8;color:var(--blue-2);font-weight:800;font-size:14px;padding:4px 14px;border-radius:999px;text-decoration:none}
-.pdp-info h1{font-family:"Suez One",serif;font-weight:400;color:var(--title);font-size:clamp(32px,4vw,48px);line-height:1.12;margin:0}
+.pdp-info{min-width:0;padding:38px 42px;display:flex;flex-direction:column;gap:14px}
+.chip{align-self:flex-start;background:#e8f4f8;color:var(--blue-2);font-weight:800;font-size:0.875rem;padding:4px 14px;border-radius:999px;text-decoration:none}
+.pdp-info h1{font-family:"Suez One",serif;font-weight:400;color:var(--title);font-size:clamp(2rem,4vw,3rem);line-height:1.12;margin:0}
 .author{color:var(--muted);font-weight:600;margin-top:-6px}
 .flags{display:flex;gap:8px;flex-wrap:wrap}
-.flag{font-weight:800;font-size:14px;padding:3px 12px;border-radius:999px}
-.flag.new{background:#fff4dc;color:#a8620b}
-.flag.back{background:#fff4dc;color:#a8620b}
+.flag{font-weight:800;font-size:0.875rem;padding:3px 12px;border-radius:999px}
+.flag.new{background:#fff4dc;color:#8a4f05}
+.flag.back{background:#fff4dc;color:#8a4f05}
 .price-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.price{font-family:"Suez One",serif;font-size:44px;color:var(--ink);line-height:1}
-.price small{font-family:"Heebo",sans-serif;font-size:17px;font-weight:700;color:var(--muted)}
-.stock{font-weight:800;font-size:15px;display:inline-flex;align-items:center;gap:6px}
+.price{font-family:"Suez One",serif;font-size:2.75rem;color:var(--ink);line-height:1}
+.price small{font-family:"Heebo",sans-serif;font-size:1.0625rem;font-weight:700;color:var(--muted)}
+.stock{font-weight:800;font-size:0.9375rem;display:inline-flex;align-items:center;gap:6px}
 .stock::before{content:"";width:9px;height:9px;border-radius:50%;background:currentColor}
-.stock.in{color:#1e9a52}
+.stock.in{color:#157a3f}
 .stock.out{color:var(--sold)}
 .stock.ask{color:var(--muted)}
-.pdp-desc{font-size:18px;line-height:1.75;margin:0}
+.pdp-desc{font-size:1.125rem;line-height:1.75;margin:0}
 .pdp-desc.en,.pdp-info h1.en{direction:ltr;text-align:left}
 .buy{border-top:1px solid #edf1f4;padding-top:20px;margin-top:6px;display:flex;flex-direction:column;gap:12px}
 .qty-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .qty-row label{font-weight:700}
 .qty{display:inline-flex;align-items:center;border:2px solid #dbe5ec;border-radius:999px;overflow:hidden}
-.qty button{border:0;background:#fff;width:40px;height:40px;font-size:22px;font-weight:700;color:var(--blue-2);cursor:pointer}
+.qty button{border:0;background:#fff;width:40px;height:40px;font-size:1.375rem;font-weight:700;color:var(--blue-2);cursor:pointer}
 .qty button:hover{background:#f4fafc}
-.qty output{min-width:40px;text-align:center;font-weight:800;font-size:18px}
+.qty output{min-width:40px;text-align:center;font-weight:800;font-size:1.125rem}
 .total{color:var(--muted);font-weight:700}
-.buy .btn{justify-content:center;font-size:18px;padding:14px 24px}
+.buy .btn{justify-content:center;white-space:normal;text-align:center;line-height:1.35;font-size:1.125rem;padding:14px 24px}
 .btn-wa{box-shadow:0 8px 20px rgba(23,130,68,.25)}
+.buy .btn svg{flex:0 0 auto}
 .buy .btn:not(.disabled):hover{transform:translateY(-2px)}
 .buy .help{text-align:center;color:var(--muted);margin:0}
 .buy .help a{color:var(--blue-2);font-weight:800;direction:ltr;unicode-bidi:isolate;text-decoration:none}
-.help{font-size:14px;color:var(--muted);margin:0}
+.help{font-size:0.875rem;color:var(--muted);margin:0}
 /* בחירת כרכים */
 .vol-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .vol-head label{font-weight:800}
-.vol-all{border:2px solid var(--ribbon);background:#fff;color:var(--ribbon);font:inherit;font-weight:800;font-size:15px;padding:6px 16px;border-radius:999px;cursor:pointer}
+.vol-all{border:2px solid var(--ribbon);background:#fff;color:var(--ribbon);font:inherit;font-weight:800;font-size:0.9375rem;padding:6px 16px;border-radius:999px;cursor:pointer}
 .vol-all.on{background:var(--ribbon);color:#fff}
 .vols{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:8px}
 .vol{border:2px solid #dbe5ec;background:#fff;border-radius:14px;padding:9px 8px;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:1px;color:var(--ink);transition:border-color .15s,background .15s}
-.vol b{font-size:16px}
-.vol small{font-size:13px;color:var(--muted)}
+.vol b{font-size:1rem}
+.vol small{font-size:0.8125rem;color:var(--muted)}
 .vol:hover{border-color:var(--blue-1)}
 .vol.on{border-color:var(--ribbon);background:#e8f4f8;color:var(--blue-2)}
 .vol.on small{color:var(--blue-2)}
-.sum{font-size:16px;color:var(--muted)}
-.sum b{color:var(--ink);font-size:18px}
-.btn.disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.sum{font-size:1rem;color:var(--muted)}
+.sum b{color:var(--ink);font-size:1.125rem}
+.btn.disabled{background:#e3e8ee;color:#5b6475;cursor:not-allowed;box-shadow:none}
 .help a{color:var(--blue-2);font-weight:700}
 
 .related{max-width:1200px;margin:0 auto;padding:60px 20px 0}
-.related h2{font-family:"Suez One",serif;font-weight:400;color:var(--title);font-size:clamp(26px,3.5vw,36px);text-align:center;margin:0}
+.related h2{font-family:"Suez One",serif;font-weight:400;color:var(--title);font-size:clamp(1.625rem,3.5vw,2.25rem);text-align:center;margin:0}
 .related .grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 .notfound{max-width:700px;margin:60px auto;padding:40px 30px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);text-align:center}
 .notfound h1{font-family:"Suez One",serif;font-weight:400;color:var(--title);margin:0 0 10px}
@@ -80,12 +81,12 @@
   .pdp-card{grid-template-columns:1fr}
   .pdp-cover{min-height:0;padding:30px 20px}
   .pdp-info{padding:26px 22px}
-  .price{font-size:38px}
+  .price{font-size:2.375rem}
   .related .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 </style>
-<script src="a11y.js?v=1"></script>
-<script src="menu.js?v=2"></script>
+<script src="a11y.js?v=2"></script>
+<script src="menu.js?v=3"></script>
 </head>
 <body>
 
@@ -108,7 +109,7 @@
 </footer>
 
 <script src="data.js?v=6"></script>
-<script src="lib.js?v=2"></script>
+<script src="lib.js?v=3"></script>
 <script>
 const b = findItem(new URLSearchParams(location.search).get("b") || "");
 const page = document.getElementById("page");
@@ -213,7 +214,7 @@ if (!b) {
       document.getElementById("sum").innerHTML = picked.size
         ? (all ? 'כל הסט' : picked.size + (picked.size === 1 ? ' כרך' : ' כרכים')) + (qty > 1 ? ' × ' + qty + ' עותקים' : '') + ' · <b>סה"כ ' + (count * b.price) + NIS + '</b>'
         : 'בחרו כרך אחד או יותר';
-      order.classList.toggle("disabled", !picked.size);
+      order.classList.toggle("disabled", !picked.size); order.setAttribute("aria-disabled", !picked.size);
       const which = all ? 'את כל הסט (' + vols.length + ' כרכים)' : [...picked].sort((x, y) => x - y).map(i => label(vols[i])).join(", ");
       order.href = picked.size ? wa('שלום, אשמח להזמין מ"' + b.name + '" (משכיל לאיתן): ' + which + (qty > 1 ? ', ' + qty + ' עותקים מכל כרך' : '')) : "#";
     };

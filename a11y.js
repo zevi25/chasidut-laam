@@ -8,33 +8,56 @@
   try { st = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch {}
   const root = document.documentElement;
   const apply = () => {
-    root.style.fontSize = st.size ? (100 + st.size * 12.5) + "%" : "";
+    root.style.fontSize = st.size ? (100 + st.size * 25) + "%" : "";
+    root.classList.toggle("a11y-big", !!st.size);
     root.classList.toggle("a11y-contrast", !!st.contrast);
     root.classList.toggle("a11y-links", !!st.links);
     root.classList.toggle("a11y-still", !!st.still);
     try { localStorage.setItem(KEY, JSON.stringify(st)); } catch {}
+    window.dispatchEvent(new Event("resize")); // גובה הפס העליון משתנה עם הטקסט
   };
   apply();
 
   const css = document.createElement("style");
   css.textContent = `
-.skip{position:absolute;inset-inline-start:12px;top:-60px;z-index:100;background:#fff;color:#1666a8;font-weight:800;padding:10px 18px;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.25);text-decoration:none}
-.skip:focus{top:12px}
+.skip{position:absolute;inset-inline-start:12px;top:0;transform:translateY(-120%);z-index:100;background:#fff;color:#1666a8;font-weight:800;padding:10px 18px;border-radius:10px;text-decoration:none}
+.skip:focus{top:12px;transform:none;box-shadow:0 6px 20px rgba(0,0,0,.25)}
 :focus-visible{outline:3px solid #f3b552!important;outline-offset:2px}
-.a11y-btn{position:fixed;bottom:16px;inset-inline-end:16px;z-index:90;width:50px;height:50px;border-radius:50%;border:0;background:#1666a8;color:#fff;font-size:26px;cursor:pointer;box-shadow:0 8px 20px rgba(10,40,90,.3);display:flex;align-items:center;justify-content:center}
-.a11y-panel{position:fixed;bottom:76px;inset-inline-end:16px;z-index:90;width:260px;max-width:calc(100vw - 32px);background:#fff;color:#1d2433;border-radius:18px;box-shadow:0 18px 40px rgba(10,30,70,.28);padding:14px;font-family:Heebo,system-ui,sans-serif;font-size:15px}
-.a11y-panel h2{font-size:18px;margin:2px 4px 10px;color:#1c4f9c}
+.a11y-btn{position:fixed;bottom:16px;inset-inline-end:16px;z-index:90;width:50px;height:50px;border-radius:50%;border:0;background:#1666a8;color:#fff;font-size:1.625rem;cursor:pointer;box-shadow:0 8px 20px rgba(10,40,90,.3);display:flex;align-items:center;justify-content:center}
+.a11y-panel{position:fixed;bottom:76px;inset-inline-end:16px;z-index:90;width:260px;max-width:calc(100vw - 32px);background:#fff;color:#1d2433;border-radius:18px;box-shadow:0 18px 40px rgba(10,30,70,.28);padding:14px;font-family:Heebo,system-ui,sans-serif;font-size:0.9375rem}
+.a11y-panel h2{font-size:1.125rem;margin:2px 4px 10px;color:#1c4f9c}
 .a11y-panel button,.a11y-panel a{display:flex;width:100%;align-items:center;justify-content:space-between;gap:8px;border:2px solid #e3e8ee;background:#fff;color:#1d2433;border-radius:12px;padding:9px 12px;margin-bottom:6px;font:inherit;font-weight:700;cursor:pointer;text-decoration:none}
 .a11y-panel button[aria-pressed=true]{border-color:#127a93;background:#e8f4f8;color:#1666a8}
 .a11y-panel .size{display:flex;gap:6px}
 .a11y-panel .size button{justify-content:center}
 .a11y-panel a{color:#1666a8}
-html.a11y-contrast body{filter:contrast(1.35)}
+/* במסך עם תפריט המבורגר הכפתור נמצא בפס העליון, כדי שלא יסתיר תוכן. במחשב רחב הוא צף בפינה */
+@media (max-width:1340px){
+  .a11y-btn{position:static;width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.16);box-shadow:none;flex:0 0 auto}
+  .a11y-btn:hover{background:rgba(255,255,255,.26)}
+  .a11y-panel{bottom:auto;top:calc(var(--top-h,76px) + 8px);inset-inline-end:12px;max-height:calc(100vh - var(--top-h,76px) - 24px);overflow:auto}
+}
+html.a11y-big .a11y-panel{width:min(400px,calc(100vw - 24px));max-height:calc(100vh - 100px);overflow:auto}
+html.a11y-big .desc{display:block;overflow:visible}
+html.a11y-big .ribbon,html.a11y-big h1,html.a11y-big h2{overflow-wrap:anywhere}
+html.a11y-big .btn,html.a11y-big .cat-title,html.a11y-big .nav a{white-space:normal}
+html.a11y-big .btn-lg{min-width:0}
+html.a11y-big .book .body{padding-bottom:4.5rem}
+html.a11y-big .top-in{flex-wrap:nowrap}
+@media (max-width:600px){
+  html.a11y-big .grid:not(.feat-grid),html.a11y-big .related .grid{grid-template-columns:minmax(0,1fr)}
+  html.a11y-big .grid.feat-grid .book{flex-basis:84%}
+  html.a11y-big .top-in .phone{display:none}
+  html.a11y-big .a11y-btn{margin-inline-start:auto}
+  html.a11y-big .cat-title{padding-inline:16px;max-width:100%}
+}
+html.a11y-contrast{filter:contrast(1.35)} /* על html ולא על body: כך הכפתורים הצפים נשארים במקום */
 html.a11y-contrast .desc,html.a11y-contrast .cat-intro,html.a11y-contrast p{color:#000!important}
+html.a11y-contrast .a11y-panel button,html.a11y-contrast .a11y-panel a,html.a11y-contrast .vol,html.a11y-contrast .qty{border-color:#5b6475}
 html.a11y-links a{text-decoration:underline!important;text-underline-offset:3px}
 html.a11y-still *,html.a11y-still *::before,html.a11y-still *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-.legal-links{margin-top:14px;font-size:14px;display:flex;gap:6px 14px;justify-content:center;flex-wrap:wrap}
+.legal-links{margin-top:14px;font-size:0.875rem;display:flex;gap:6px 14px;justify-content:center;flex-wrap:wrap}
 .legal-links a{color:#5b6475}
 `;
   document.head.appendChild(css);
@@ -66,7 +89,10 @@ html.a11y-still *,html.a11y-still *::before,html.a11y-still *::after{animation:n
       + toggle("contrast", "ניגודיות גבוהה") + toggle("links", "הדגשת קישורים") + toggle("still", "עצירת אנימציות")
       + '<button type="button" data-reset="1">איפוס הגדרות</button>'
       + '<a href="accessibility.html">הצהרת נגישות ←</a>';
-    document.body.append(btn, panel);
+    (document.querySelector(".top-in") || document.body).append(btn); // לפני כפתור ההמבורגר, שנוסף ב-menu.js
+    document.body.append(panel);
+    const setTop = () => { const t = document.querySelector(".top"); if (t) root.style.setProperty("--top-h", t.offsetHeight + "px"); };
+    setTop(); window.addEventListener("resize", setTop);
     const open = v => { panel.hidden = !v; btn.setAttribute("aria-expanded", v); if (v) panel.querySelector("button").focus(); };
     btn.onclick = () => open(panel.hidden);
     document.addEventListener("keydown", e => { if (e.key === "Escape" && !panel.hidden) { open(false); btn.focus(); } });

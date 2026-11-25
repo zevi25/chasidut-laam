@@ -24,7 +24,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:"Heebo",system-ui,sans-serif;font-size:18px;line-height:1.75;overflow-x:hidden}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Heebo",system-ui,sans-serif;font-size:1.125rem;line-height:1.75;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit}
 
@@ -33,7 +33,7 @@ a{color:inherit}
 .top-in{max-width:1200px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:22px}
 .logo img{height:56px;width:auto}
 .nav{display:flex;gap:4px;flex-wrap:wrap;flex:1}
-.nav a{text-decoration:none;font-weight:700;font-size:15px;padding:6px 12px;border-radius:999px;opacity:.92}
+.nav a{text-decoration:none;font-weight:700;font-size:0.9375rem;padding:6px 12px;border-radius:999px;opacity:.92}
 .nav a:hover,.nav a.on{background:rgba(255,255,255,.18);opacity:1}
 .phone{direction:ltr;text-decoration:none;font-weight:900;letter-spacing:.06em;background:#fff;color:var(--blue-2);padding:8px 18px;border-radius:999px;white-space:nowrap}
 
@@ -43,60 +43,60 @@ a{color:inherit}
 .hero-card{max-width:980px;margin:-90px auto 0;background:#fff;border-radius:6px;box-shadow:0 18px 40px rgba(20,40,80,.16);display:grid;grid-template-columns:1fr 1.1fr;overflow:hidden}
 .hero-card img{width:100%;height:100%;object-fit:cover;min-height:300px}
 .hero-text{padding:34px 36px;align-self:center}
-.hero-text h1{font-family:"Suez One",serif;font-weight:400;color:var(--title);font-size:clamp(36px,5.5vw,60px);line-height:1.08;margin:0}
-.hero-text .sub{font-family:"Suez One",serif;color:var(--ribbon);font-size:clamp(19px,2.4vw,25px);margin:10px 0 14px;line-height:1.35}
-.dates{display:inline-block;background:var(--paper);border-radius:999px;padding:4px 18px;font-weight:700;color:var(--muted);font-size:16px}
+.hero-text h1{font-family:"Suez One",serif;font-weight:400;color:var(--title);font-size:clamp(2.25rem,5.5vw,3.75rem);line-height:1.08;margin:0}
+.hero-text .sub{font-family:"Suez One",serif;color:var(--ribbon);font-size:clamp(1.1875rem,2.4vw,1.5625rem);margin:10px 0 14px;line-height:1.35}
+.dates{display:inline-block;background:var(--paper);border-radius:999px;padding:4px 18px;font-weight:700;color:var(--muted);font-size:1rem}
 
 /* פרקים */
 .wrap{max-width:880px;margin:0 auto;padding:0 20px}
 .chapter{margin-top:64px}
 .chapter-title{display:table;margin:0 auto 22px;background:#fff;padding:8px 40px 12px;box-shadow:0 14px 22px -10px rgba(20,40,80,.35)}
-.chapter-title h2{font-family:"Suez One",serif;font-weight:400;color:var(--title);font-size:clamp(28px,4.5vw,42px);line-height:1.15;margin:0;text-align:center}
+.chapter-title h2{font-family:"Suez One",serif;font-weight:400;color:var(--title);font-size:clamp(1.75rem,4.5vw,2.625rem);line-height:1.15;margin:0;text-align:center}
 .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 36px}
 .card p{margin:0 0 14px}
 .card p:last-child{margin-bottom:0}
 
 /* ציטוט בקולו של הרב */
-.voice{border-inline-start:5px solid var(--ribbon);background:#f4fafc;border-radius:0 14px 14px 0;padding:14px 22px;margin:18px 0;font-size:19px}
-.voice cite{display:block;font-style:normal;font-size:14px;color:var(--muted);margin-top:6px}
+.voice{border-inline-start:5px solid var(--ribbon);background:#f4fafc;border-radius:0 14px 14px 0;padding:14px 22px;margin:18px 0;font-size:1.1875rem}
+.voice cite{display:block;font-style:normal;font-size:0.875rem;color:var(--muted);margin-top:6px}
 /* ציטוט מהרבי */
 .rebbe{background:linear-gradient(100deg,var(--blue-2),var(--blue-1));color:#fff;border-radius:var(--radius);padding:30px 36px;text-align:center;box-shadow:var(--shadow);margin:22px 0}
-.rebbe q{display:block;font-family:"Suez One",serif;font-size:clamp(24px,3.6vw,34px);line-height:1.35;quotes:none}
-.rebbe span{display:block;margin-top:10px;opacity:.9;font-size:15px}
+.rebbe q{display:block;font-family:"Suez One",serif;font-size:clamp(1.5rem,3.6vw,2.125rem);line-height:1.35;quotes:none}
+.rebbe span{display:block;margin-top:10px;opacity:.9;font-size:0.9375rem}
 
 figure{margin:22px 0}
 figure img{border-radius:16px;box-shadow:var(--shadow);width:100%}
-figcaption{font-size:14px;color:var(--muted);margin-top:8px;text-align:center}
+figcaption{font-size:0.875rem;color:var(--muted);margin-top:8px;text-align:center}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
 
 /* ציר זמן */
 .timeline{list-style:none;margin:0;padding:0}
 .timeline li{display:flex;gap:16px;align-items:baseline;padding:10px 0;border-bottom:1px solid #edf1f4}
 .timeline li:last-child{border-bottom:0}
-.timeline b{flex:0 0 auto;min-width:92px;text-align:center;background:var(--ribbon);color:#fff;font-weight:800;border-radius:999px;padding:2px 14px;font-size:16px}
+.timeline b{flex:0 0 auto;min-width:92px;text-align:center;background:var(--ribbon);color:#fff;font-weight:800;border-radius:999px;padding:2px 14px;font-size:1rem}
 
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:6px}
 .fact{background:var(--paper);border-radius:14px;padding:14px 16px;text-align:center}
-.fact strong{display:block;font-family:"Suez One",serif;font-weight:400;color:var(--title);font-size:30px;line-height:1.1}
-.fact span{font-size:15px;color:var(--muted)}
+.fact strong{display:block;font-family:"Suez One",serif;font-weight:400;color:var(--title);font-size:1.875rem;line-height:1.1}
+.fact span{font-size:0.9375rem;color:var(--muted)}
 
 .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
-.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;padding:12px 26px;border-radius:999px;font-size:17px}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;padding:12px 26px;border-radius:999px;font-size:1.0625rem}
 .btn-blue{background:linear-gradient(100deg,var(--blue-2),var(--blue-1));color:#fff}
 .btn-ghost{background:#fff;color:var(--blue-2);border:2px solid var(--blue-2)}
 .btn{transition:transform .15s,box-shadow .15s}
-.btn-lg{padding:15px 32px;font-size:18px;min-width:220px;justify-content:center;box-shadow:0 8px 20px rgba(20,60,120,.16)}
+.btn-lg{padding:15px 32px;font-size:1.125rem;min-width:220px;justify-content:center;box-shadow:0 8px 20px rgba(20,60,120,.16)}
 .btn-ghost.btn-lg{box-shadow:none}
 .btn-lg:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(20,60,120,.22)}
 @media (max-width:600px){.closing .cta{flex-direction:column;align-items:stretch}.btn-lg{min-width:0}}
 .closing{text-align:center}
-.closing p{font-size:20px}
+.closing p{font-size:1.25rem}
 
 .foot{margin-top:80px;padding:40px 20px 50px;text-align:center}
 .foot .pill{display:inline-flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center}
-.foot .label{font-size:clamp(20px,3vw,28px);color:var(--title);font-weight:500}
-.foot .num{direction:ltr;background:linear-gradient(100deg,var(--blue-2),var(--blue-1));color:#fff;text-decoration:none;font-weight:900;letter-spacing:.08em;font-size:clamp(24px,4vw,40px);padding:6px 34px;border-radius:999px}
-.foot p{color:var(--muted);font-size:14px;margin-top:22px}
+.foot .label{font-size:clamp(1.25rem,3vw,1.75rem);color:var(--title);font-weight:500}
+.foot .num{direction:ltr;background:linear-gradient(100deg,var(--blue-2),var(--blue-1));color:#fff;text-decoration:none;font-weight:900;letter-spacing:.08em;font-size:clamp(1.5rem,4vw,2.5rem);padding:6px 34px;border-radius:999px}
+.foot p{color:var(--muted);font-size:0.875rem;margin-top:22px}
 
 @media (max-width:760px){
   .nav{display:none}
@@ -107,12 +107,12 @@ figcaption{font-size:14px;color:var(--muted);margin-top:8px;text-align:center}
   .card{padding:24px 20px}
   .rebbe{padding:24px 18px}
   .pair{grid-template-columns:1fr}
-  body{font-size:17px}
+  body{font-size:1.0625rem}
 }
 </style>
 <script src="data.js?v=6"></script>
-<script src="a11y.js?v=1"></script>
-<script src="menu.js?v=2"></script>
+<script src="a11y.js?v=2"></script>
+<script src="menu.js?v=3"></script>
 </head>
 <body>
 

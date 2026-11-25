@@ -12,17 +12,25 @@
   .top-in{justify-content:space-between}
   .top-in .phone{margin-inline-start:auto}
 }
-@media (max-width:420px){.top-in{gap:10px}.top-in .phone{padding:7px 12px;font-size:14px;letter-spacing:.03em}}
+html.a11y-big .top .nav{display:none!important}
+html.a11y-big .menu-btn{display:inline-flex}
+html.a11y-big .top-in .phone{margin-inline-start:auto}
+html.a11y-big .menu-drawer{width:min(440px,92vw);overflow:auto}
+html.a11y-big .menu-body{overflow:visible;flex:none}
+@media (max-width:420px){.top-in{gap:10px;padding-inline:14px}.top-in .phone{padding:7px 12px;font-size:0.875rem;letter-spacing:.03em}}
+@media (max-width:350px){.top-in{gap:6px;padding-inline:10px}.top-in .phone{padding:6px 8px;font-size:.8rem}}
 .menu-shade{position:fixed;inset:0;z-index:94;background:rgba(10,25,50,.45);opacity:0;transition:opacity .25s}
 .menu-shade.open{opacity:1}
-.menu-drawer{position:fixed;top:0;bottom:0;left:0;z-index:95;width:min(320px,86vw);background:#fff;box-shadow:12px 0 40px rgba(0,0,0,.25);display:flex;flex-direction:column;transform:translateX(-104%);transition:transform .28s ease;font-family:Heebo,system-ui,sans-serif}
-.menu-drawer.open{transform:none}
+.menu-drawer{position:fixed;top:0;bottom:0;left:0;z-index:95;width:min(320px,86vw);background:#fff;display:flex;flex-direction:column;transform:translateX(-104%);transition:transform .28s ease;font-family:Heebo,system-ui,sans-serif}
+.menu-drawer.open{transform:none;box-shadow:12px 0 40px rgba(0,0,0,.25)}
+/* סגור = לא קיים: בלי צל, ובלי שמקלדת או קורא מסך ייכנסו אליו */
+.menu-drawer[hidden]{display:none}
 .menu-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:linear-gradient(100deg,#1666a8,#1279a8);color:#fff}
-.menu-head b{font-family:"Suez One",serif;font-weight:400;font-size:22px}
-.menu-head button{border:0;background:rgba(255,255,255,.18);color:#fff;width:40px;height:40px;border-radius:10px;font-size:22px;cursor:pointer}
+.menu-head b{font-family:"Suez One",serif;font-weight:400;font-size:1.375rem}
+.menu-head button{border:0;background:rgba(255,255,255,.18);color:#fff;width:40px;height:40px;border-radius:10px;font-size:1.375rem;cursor:pointer}
 .menu-body{overflow:auto;padding:10px 10px 18px;flex:1}
-.menu-body h3{margin:10px 10px 6px;font-size:13px;color:#5b6475;font-weight:700;letter-spacing:.02em}
-.menu-body a{display:flex;align-items:center;gap:10px;text-decoration:none;color:#1d2433;font-weight:700;font-size:17px;padding:11px 14px;border-radius:12px;border-inline-start:4px solid transparent}
+.menu-body h3{margin:10px 10px 6px;font-size:0.8125rem;color:#5b6475;font-weight:700;letter-spacing:.02em}
+.menu-body a{display:flex;align-items:center;gap:10px;text-decoration:none;color:#1d2433;font-weight:700;font-size:1.0625rem;padding:11px 14px;border-radius:12px;border-inline-start:4px solid transparent}
 .menu-body a:hover{background:#f4fafc}
 .menu-body a.on{background:#e8f4f8;color:#1666a8;border-inline-start-color:#127a93}
 .menu-body a.off{opacity:.35;pointer-events:none}
@@ -54,7 +62,7 @@ html.menu-lock,html.menu-lock body{overflow:hidden}
 
     const shade = document.createElement("div"); shade.className = "menu-shade"; shade.hidden = true;
     const drawer = document.createElement("nav");
-    drawer.className = "menu-drawer"; drawer.id = "menu-drawer"; drawer.hidden = true; drawer.setAttribute("aria-label", "תפריט");
+    drawer.className = "menu-drawer"; drawer.id = "menu-drawer"; drawer.hidden = true; drawer.setAttribute("aria-label", "תפריט"); drawer.setAttribute("role", "dialog"); drawer.setAttribute("aria-modal", "true");
     drawer.innerHTML = '<div class="menu-head"><b>תפריט</b><button type="button" aria-label="סגירת התפריט">✕</button></div>'
       + '<div class="menu-body">'
       + (sections.length > 1 ? '<h3>קטגוריות</h3><div id="menu-cats">' + sections.map(x => '<a href="' + href(x.id) + '" data-id="' + x.id + '">' + x.title + '</a>').join("") + '</div><hr>' : '')
@@ -69,17 +77,24 @@ html.menu-lock,html.menu-lock body{overflow:hidden}
     if (navOn) { const id = navOn.getAttribute("href").split("#")[1]; const m = drawer.querySelector('#menu-cats a[data-id="' + id + '"]'); if (m) m.classList.add("on"); }
 
     const open = v => {
-      if (v) { shade.hidden = drawer.hidden = false; requestAnimationFrame(() => { shade.classList.add("open"); drawer.classList.add("open"); }); }
+      if (v) { shade.hidden = drawer.hidden = false; void drawer.offsetWidth; shade.classList.add("open"); drawer.classList.add("open"); }
       else { shade.classList.remove("open"); drawer.classList.remove("open"); setTimeout(() => { if (!drawer.classList.contains("open")) shade.hidden = drawer.hidden = true; }, 280); }
       document.documentElement.classList.toggle("menu-lock", v);
       btn.setAttribute("aria-expanded", v);
-      if (v) setTimeout(() => (drawer.querySelector("a.on") || drawer.querySelector("a")).focus(), 60); else btn.focus();
+      if (v) setTimeout(() => (drawer.querySelector("a.on") || drawer.querySelector("a")).focus(), 60); else btn.focus({ preventScroll:true });
     };
     // בעמוד הבית: לפני הפתיחה מעדכנים איזו קטגוריה מסומנת (markCurrent ב-index.html מאזין לגלילה)
     btn.onclick = () => { window.dispatchEvent(new Event("scroll")); open(true); };
     shade.onclick = () => open(false);
     drawer.querySelector(".menu-head button").onclick = () => open(false);
     document.addEventListener("keydown", e => { if (e.key === "Escape" && !drawer.hidden) open(false); });
+    // כשהתפריט פתוח, Tab נשאר בתוכו
+    drawer.addEventListener("keydown", e => {
+      if (e.key !== "Tab") return;
+      const f = [...drawer.querySelectorAll("a,button")].filter(x => x.offsetParent !== null && !x.classList.contains("off")), first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
     // בעמוד הבית: גלילה לקטגוריה וסגירת התפריט
     drawer.addEventListener("click", e => {
       const a = e.target.closest("a"); if (!a) return;
