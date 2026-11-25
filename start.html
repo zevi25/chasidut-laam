@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מאיפה מתחילים? · ספרי הרב יקותיאל גרין</title>
+<meta name="description" content="איזה ספר של הרב יקותיאל גרין ע&quot;ה מתאים לכם: למתחילים בתניא, ללימוד מעמיק, לילדים, להורים ולמחנכים, לבר מצווה ולחגים.">
+<link rel="icon" href="img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<meta name="theme-color" content="#1666a8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=Suez+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=9">
+<script src="data.js?v=6"></script>
+<script src="a11y.js?v=2"></script>
+<script src="menu.js?v=5"></script>
+<script src="cart.js?v=1"></script>
+<style>
+.wrap{max-width:1200px;margin:30px auto 0;padding:0 20px}
+.intro{max-width:760px;margin:0 auto;text-align:center}
+.intro h1{font-family:"Suez One",serif;font-weight:400;color:var(--title);font-size:clamp(2.2rem,5vw,3.2rem);margin:0 0 6px}
+.intro p{font-size:1.125rem;margin:0}
+.jump{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:22px auto 0;max-width:900px}
+.jump a{background:#fff;border-radius:999px;padding:9px 16px;font-weight:700;text-decoration:none;color:var(--blue-2);box-shadow:var(--shadow)}
+.group{margin-top:50px;scroll-margin-top:calc(var(--top-h,76px) + 16px)}
+.group h2{font-family:"Suez One",serif;font-weight:400;color:var(--title);font-size:clamp(1.7rem,3.5vw,2.3rem);margin:0;text-align:center}
+.group>p{text-align:center;color:var(--muted);max-width:720px;margin:6px auto 0}
+.group .grid{margin-top:30px}
+.ask{margin:60px auto 0;max-width:720px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:26px;text-align:center}
+.ask h2{font-family:"Suez One",serif;font-weight:400;color:var(--title);margin:0 0 6px}
+@media (max-width:600px){.group{margin-top:36px}.jump a{padding:8px 13px;font-size:.95rem}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="logo" href="index.html"><img src="img/logo.png" alt="חסידות לעם · ספרי הרב גרין, לעמוד הבית"></a>
+    <nav class="nav"><a href="index.html">הספרים</a><a class="about-link" href="about.html">על הרב גרין</a></nav>
+    <a class="phone" href="tel:0546398851">054-6398851</a>
+  </div>
+</header>
+
+<main class="wrap" id="content" tabindex="-1">
+  <div class="intro">
+    <h1>מאיפה מתחילים?</h1>
+    <p>הרב גרין כתב עשרות ספרים, ולא תמיד ברור איזה מתאים. הנה כמה נקודות פתיחה לפי מי שלומד.</p>
+  </div>
+  <nav class="jump" id="jump" aria-label="קפיצה לפי נושא"></nav>
+  <div id="groups"></div>
+  <div class="ask"><h2>עדיין מתלבטים?</h2><p>ספרו לנו למי הספר מיועד, ונשמח להמליץ.</p><div class="cta"><a class="btn btn-wa btn-lg" id="ask" target="_blank" rel="noopener" href="#">שאלה בוואטסאפ</a></div></div>
+</main>
+
+<footer class="foot">
+  <div class="pill">
+    <span class="label">להשגת הספרים: "חסידות לעם"</span>
+    <a class="num" href="tel:0546398851">054-6398851</a>
+  </div>
+  <p><a href="index.html">לכל הספרים</a> · <a href="start.html">מאיפה מתחילים?</a> · <a href="about.html">על הרב יקותיאל גרין ע"ה</a></p>
+</footer>
+
+<script src="lib.js?v=5"></script>
+<script>
+// הקבוצות והספרים בכל אחת. הספרים עצמם (שם, תיאור, מחיר ומלאי) נלקחים מ-data.js
+const GROUPS = [{"t": "מכירים את התניא בפעם הראשונה", "p": "ספרי מבוא קצרים, לפני שנכנסים לביאור המלא.", "b": ["tiferet", "leiyun", "teshuva-derech"]}, {"t": "רוצים ללמוד תניא ברצינות, פרק אחר פרק", "p": "סדרת \"משכיל לאיתן\": ביאור שוטף עם הגדרות וסיכומים, שמתאים גם ללימוד עצמי. מתחילים מלקוטי אמרים, כרך א'.", "b": ["likutei", "shaar", "kodesh"]}, {"t": "לילדים", "p": "תניא לילדים נלמד במוסדות חב\"ד בגילאים 7-13. \"שמע בני\" מומלץ ללימוד בבתי הספר היסודיים.", "b": ["kids-set", "kids-tet", "shma"]}, {"t": "להורים ולמחנכים", "p": "הדרכה בחינוך, במידות ובדרך להגיע אל הילד והתלמיד.", "b": ["klalei", "horaah", "tikun", "naar"]}, {"t": "לנוער ולמקורבים", "p": "מאמרי האדמו\"רים בנושאים בסיסיים, מנוקדים ומבוארים בשפה קלה.", "b": ["chayei", "kuntres-maayan", "hashem-echad"]}, {"t": "מתנה לבר מצווה", "p": "המאמר לבר המצווה על מהותה של מצוות תפילין, מנוקד ומבואר.", "b": ["tefillin"]}, {"t": "לקראת החגים", "p": "", "b": ["hagada", "yetziat", "kinyan", "bati"]}, {"t": "אהבת ישראל", "p": "חמישה ספרים על אהבת ישראל באור החסידות. הכי קל להתחיל במאמר של הרבי הריי\"צ.", "b": ["ahavat-rayatz", "ahavat-tanya"]}, {"t": "באנגלית", "p": "Books in English", "b": ["en-veata", "en-love", "en-bati", "en-kinyan"]}];
+document.getElementById("ask").insertAdjacentHTML("afterbegin", ICON_WA);
+document.getElementById("ask").href = wa("שלום, אשמח להמלצה על ספר של הרב גרין. הספר מיועד ל...");
+function card(x){
+  const url = bookUrl(x), en = x.cat.en;
+  return '<article class="book' + (x.price === "sold" ? ' is-sold' : '') + '">'
+    + '<a class="shelf" href="' + url + '"><img loading="lazy" style="width:' + (x.isSeries ? '100%' : 'calc(var(--bookw) * ' + (IMG_R[x.img] || 1) + ')') + '" src="covers/' + x.img + '.png?v=' + IMG_V + '" alt="' + esc(x.name) + '"></a>'
+    + '<div class="body"><a class="ribbon' + (en ? ' en" lang="en' : '') + '" href="' + url + '">' + esc(x.name) + '</a>'
+    + '<p class="desc' + (en ? ' en" lang="en' : '') + '">' + esc(x.desc) + '</p>'
+    + '<a class="order" href="' + url + '">' + (x.price === "sold" ? "לפרטים ולבירור" : "לפרטים ולהזמנה") + ' ←</a>' + priceTag(x) + addBtn(x) + '</div></article>';
+}
+const G = GROUPS.map((g, i) => ({ ...g, id:"g" + i, items:g.b.map(findItem).filter(Boolean) })).filter(g => g.items.length);
+document.getElementById("jump").innerHTML = G.map(g => '<a href="#' + g.id + '">' + g.t + '</a>').join("");
+document.getElementById("groups").innerHTML = G.map(g => '<section class="group" id="' + g.id + '"><h2>' + g.t + '</h2>' + (g.p ? '<p' + (/^[A-Za-z]/.test(g.p) ? ' lang="en"' : '') + '>' + esc(g.p) + '</p>' : '') + '<div class="grid">' + g.items.map(card).join("") + '</div></section>').join("");
+</script>
+</body>
+</html>

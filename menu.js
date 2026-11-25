@@ -72,6 +72,8 @@ html.menu-lock,html.menu-lock body{overflow:hidden}
       + '<div class="menu-body">'
       + (sections.length > 1 ? '<h3>קטגוריות</h3><div id="menu-cats">' + sections.map(x => '<a href="' + href(x.id) + '" data-id="' + x.id + '">' + x.title + '</a>').join("") + '</div><hr>' : '')
       + '<a href="' + (onIndex ? '#catalog' : 'index.html') + '"' + (page === "index.html" && !onIndex ? ' class="on"' : '') + '>כל הספרים</a>'
+      + '<a href="start.html"' + (page === "start.html" ? ' class="on"' : '') + '>מאיפה מתחילים?</a>'
+      + '<a href="cart.html"' + (page === "cart.html" ? ' class="on"' : '') + '>סל ההזמנה</a>'
       + '<a href="about.html"' + (page === "about.html" ? ' class="on"' : '') + '>על הרב גרין</a>'
       + '<a href="accessibility.html"' + (page === "accessibility.html" ? ' class="on"' : '') + '>הצהרת נגישות</a>'
       + '</div>'

@@ -52,3 +52,10 @@ function searchMatch(text, query){
     return b.length >= 3 && /[א-ת]/.test(b) && forms.some(f => f === b || (b.length >= 4 && f.startsWith(b)));
   });
 }
+
+// ===== סל =====
+const HEB_N = ["א","ב","ג","ד","ה","ו","ז","ח","ט","י","יא","יב"];
+const volLabel = (b, i) => "כרך " + HEB_N[i] + "'" + (b.volumes && b.volumes[i] ? " (" + b.volWord + " " + b.volumes[i] + ")" : "");
+// אפשר להוסיף מהכרטיס רק ספר בודד שיש לו מחיר. סדרה עם כרכים נבחרת בעמוד שלה
+const quickAdd = b => typeof b.price === "number" && !b.volumes && !b.hidePrice;
+const addBtn = b => quickAdd(b) ? '<button type="button" class="add" data-img="' + esc(b.img) + '" data-name="' + esc(b.name) + '" aria-label="הוספה לסל: ' + esc(b.name) + '"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6h15l-1.5 9h-12zM6 6 5 3H2"/><path d="M13 8.5v4M11 10.5h4"/></svg></button>' : "";

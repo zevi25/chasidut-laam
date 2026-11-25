@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=Suez+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=8">
+<link rel="stylesheet" href="site.css?v=9">
 <style>
 /* עמוד ספר */
 .crumbs{max-width:1200px;margin:26px auto 0;padding:0 20px;font-size:0.9375rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
@@ -83,6 +83,10 @@
 .vol.on small{color:var(--blue-2)}
 .sum{font-size:1rem;color:var(--muted)}
 .sum b{color:var(--ink);font-size:1.125rem}
+.buy-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.buy-btns .btn{padding:14px 12px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+@media (max-width:420px){.buy-btns{grid-template-columns:1fr}}
 .btn.disabled{background:#e3e8ee;color:#5b6475;cursor:not-allowed;box-shadow:none}
 .help a{color:var(--blue-2);font-weight:700}
 
@@ -108,7 +112,8 @@
 }
 </style>
 <script src="a11y.js?v=2"></script>
-<script src="menu.js?v=4"></script>
+<script src="menu.js?v=5"></script>
+<script src="cart.js?v=1"></script>
 </head>
 <body>
 
@@ -132,7 +137,7 @@
 
 <script>window.BOOK_ID = "ahava-achdut";</script>
 <script src="data.js?v=6"></script>
-<script src="lib.js?v=4"></script>
+<script src="lib.js?v=5"></script>
 <script>
 // BOOK_ID: בעמודים שנבנים בהעלאה (book-lemaan.html). אחרת המזהה בא מהכתובת (book.html?b=lemaan)
 const b = findItem(window.BOOK_ID || new URLSearchParams(location.search).get("b") || "");
@@ -149,7 +154,7 @@ function cardHTML(x){
     + '<a class="shelf" href="' + url + '"><img loading="lazy" style="width:' + (x.isSeries ? '100%' : 'calc(var(--bookw) * ' + (IMG_R[x.img] || 1) + ')') + '" src="covers/' + x.img + '.png?v=' + IMG_V + '" alt="' + esc(x.name) + '"></a>'
     + '<div class="body"><a class="ribbon' + (en ? ' en" lang="en' : '') + '" href="' + url + '">' + esc(x.name) + '</a>'
     + '<p class="desc' + (en ? ' en" lang="en' : '') + '">' + esc(x.desc) + '</p>'
-    + '<a class="order" href="' + url + '">לפרטים ←</a>' + priceTag(x) + '</div></article>';
+    + '<a class="order" href="' + url + '">לפרטים ←</a>' + priceTag(x) + addBtn(x) + '</div></article>';
 }
 
 if (!b) {
@@ -204,8 +209,10 @@ if (!b) {
       + '<span class="qty"><button type="button" id="minus" aria-label="פחות">−</button><output id="qty">1</output><button type="button" id="plus" aria-label="יותר">+</button></span>'
       + '<span class="total" id="total"></span></div>'
       + (CHECKOUT.enabled && b.payUrl ? '<a class="btn btn-blue" id="pay" href="' + esc(b.payUrl) + '">לתשלום מאובטח</a>' : '')
-      + '<a class="btn btn-wa" id="order" target="_blank" rel="noopener" href="#">' + ICON_WA + 'להזמנה בוואטסאפ</a>'
-      + '<p class="help">אפשר גם להזמין בטלפון: <a href="tel:0546398851">054-6398851</a></p>';
+      + '<div class="buy-btns"><a class="btn btn-wa" id="order" target="_blank" rel="noopener" href="#">' + ICON_WA + 'להזמנה בוואטסאפ</a>'
+      + '<button type="button" class="btn btn-ghost" id="add">' + ICON_CART + 'הוספה לסל</button></div>'
+      + '<p class="help">רוצים כמה ספרים? מוסיפים לסל ושולחים הזמנה אחת. אפשר גם להזמין בטלפון: <a href="tel:0546398851">054-6398851</a></p>';
+    document.getElementById("add").onclick = () => { Cart.add({ img:b.img, qty }); Cart.toast((qty > 1 ? qty + " עותקים של " : "") + '"' + b.name + '" נוספו לסל'); };
     const update = () => {
       document.getElementById("qty").textContent = qty;
       document.getElementById("total").innerHTML = qty > 1 ? 'סה"כ ' + (qty * b.price) + NIS : '';
@@ -229,9 +236,11 @@ if (!b) {
       + '<div class="qty-row"><label>כמה עותקים מכל כרך?</label>'
       + '<span class="qty"><button type="button" id="minus" aria-label="פחות">−</button><output id="qty">1</output><button type="button" id="plus" aria-label="יותר">+</button></span></div>'
       + '<div class="sum" id="sum"></div>'
-      + '<a class="btn btn-wa" id="order" target="_blank" rel="noopener" href="#">' + ICON_WA + '<span id="order-txt">להזמנה בוואטסאפ</span></a>'
+      + '<div class="buy-btns"><a class="btn btn-wa" id="order" target="_blank" rel="noopener" href="#">' + ICON_WA + '<span id="order-txt">להזמנה בוואטסאפ</span></a>'
+      + '<button type="button" class="btn btn-ghost" id="add">' + ICON_CART + 'הוספה לסל</button></div>'
       + '<p class="help">אפשר גם להזמין בטלפון: <a href="tel:0546398851">054-6398851</a></p>';
-    const order = document.getElementById("order");
+    const order = document.getElementById("order"), add = document.getElementById("add");
+    add.onclick = () => { if (!picked.size) return; Cart.add({ img:b.img, vols:[...picked].sort((x, y) => x - y), qty }); Cart.toast(picked.size + " כרכים של \"" + b.name + "\" נוספו לסל"); };
     const update = () => {
       box.querySelectorAll(".vol").forEach(el => { const on = picked.has(+el.dataset.i); el.classList.toggle("on", on); el.setAttribute("aria-pressed", on); });
       const all = picked.size === vols.length;
@@ -241,7 +250,7 @@ if (!b) {
       document.getElementById("sum").innerHTML = picked.size
         ? (all ? 'כל הסט' : picked.size + (picked.size === 1 ? ' כרך' : ' כרכים')) + (qty > 1 ? ' × ' + qty + ' עותקים' : '') + ' · <b>סה"כ ' + (count * b.price) + NIS + '</b>'
         : 'בחרו כרך אחד או יותר';
-      order.classList.toggle("disabled", !picked.size); order.setAttribute("aria-disabled", !picked.size); document.getElementById("order-txt").textContent = picked.size ? "להזמנה בוואטסאפ" : "בחרו כרך כדי להזמין"; order.querySelector("svg").style.display = picked.size ? "" : "none";
+      order.classList.toggle("disabled", !picked.size); order.setAttribute("aria-disabled", !picked.size); document.getElementById("order-txt").textContent = picked.size ? "להזמנה בוואטסאפ" : "בחרו כרך כדי להזמין"; order.querySelector("svg").style.display = picked.size ? "" : "none"; add.disabled = !picked.size;
       const which = all ? 'את כל הסט (' + vols.length + ' כרכים)' : [...picked].sort((x, y) => x - y).map(i => label(vols[i])).join(", ");
       order.href = picked.size ? wa('שלום, אשמח להזמין מ"' + b.name + '" (משכיל לאיתן): ' + which + (qty > 1 ? ', ' + qty + ' עותקים מכל כרך' : '')) : "#";
     };

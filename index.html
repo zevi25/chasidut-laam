@@ -24,9 +24,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=Suez+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=8">
+<link rel="stylesheet" href="site.css?v=9">
 <script src="a11y.js?v=2"></script>
-<script src="menu.js?v=4"></script>
+<script src="menu.js?v=5"></script>
+<script src="cart.js?v=1"></script>
 </head>
 <body>
 
@@ -53,6 +54,8 @@
       <a class="btn btn-wa btn-lg" id="wa-main" href="#"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3c-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>הזמנה בוואטסאפ</a>
     </div>
     <div class="hero-links">
+      <a href="start.html">מאיפה מתחילים?</a>
+      <span aria-hidden="true">·</span>
       <a href="about.html">הכירו את הרב גרין ←</a>
       <span aria-hidden="true">·</span>
       <a href="tel:0546398851">או חייגו: <b dir="ltr">054-6398851</b></a>
@@ -74,6 +77,8 @@
     <span class="count" id="count" role="status"></span>
   </div>
 
+  <a class="start-link" href="start.html"><b>לא בטוחים מאיפה להתחיל?</b> ספרים מומלצים למתחילים, לילדים, להורים ולמחנכים ←</a>
+
   <section class="featured" id="featured">
     <div class="feat-title"><span>★</span><h2>מומלצים</h2><span>★</span></div>
     <div class="grid feat-grid" id="feat-grid"></div>
@@ -94,7 +99,7 @@
 </footer>
 
 <script src="data.js?v=6"></script>
-<script src="lib.js?v=4"></script>
+<script src="lib.js?v=5"></script>
 <script>
 // הכרטיס מוביל לעמוד הספר, ושם נמצאות ההזמנה (ובהמשך גם התשלום)
 const moreLink = (url, b) => '<a class="order" href="' + url + '">' + (b.price === "sold" ? "לפרטים ולבירור" : "לפרטים ולהזמנה") + ' ←</a>';
@@ -107,7 +112,7 @@ function bookHTML(b, en, c){
   return '<article class="book' + (b.price === "sold" ? ' is-sold' : '') + '" data-q="' + esc(c ? searchText(b.name, b.desc, c) : "") + '" data-sold="' + (b.price === "sold") + '">'
     + '<a class="shelf" href="' + url + '"><img loading="lazy" style="width:' + (b.wide ? '100%' : 'calc(var(--bookw) * ' + (IMG_R[b.img] || 1) + ')') + '" src="covers/' + b.img + '.png?v=' + IMG_V + '" alt="' + esc(b.name) + '">' + badge + '</a>'
     + '<div class="body"><a class="ribbon' + (en ? ' en" lang="en' : '') + '" href="' + url + '">' + esc(b.name) + '</a>'
-    + '<p class="desc' + (en ? ' en" lang="en' : '') + '">' + esc(b.desc) + '</p>' + moreLink(url, b) + priceTag(b) + '</div></article>';
+    + '<p class="desc' + (en ? ' en" lang="en' : '') + '">' + esc(b.desc) + '</p>' + moreLink(url, b) + priceTag(b) + addBtn(b) + '</div></article>';
 }
 function seriesHTML(s, c){
   return '<div class="series" data-q="' + esc(searchText(s.name, s.desc, c)) + '" data-sold="false">'
@@ -163,6 +168,7 @@ function filter(){
   const term = searchNorm(q.value); let shown = 0, total = 0;
   // בזמן חיפוש או סינון מסתירים את המומלצים, כדי שספר לא יופיע פעמיים
   document.getElementById("featured").classList.toggle("hidden", !!term || stock.checked);
+  document.querySelector(".start-link").classList.toggle("hidden", !!term || stock.checked);
   document.querySelectorAll(".cat").forEach(sec => {
     let any = false;
     sec.querySelectorAll(".book,.series").forEach(el => {

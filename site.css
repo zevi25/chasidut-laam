@@ -249,3 +249,9 @@ a.ribbon:hover{filter:brightness(1.08)}
   .tag small,.tag.ask{font-size:.8125rem}
   .top-in .phone{min-height:44px;display:inline-flex;align-items:center}
 }
+
+/* קישור ל"מאיפה מתחילים?" מעל המומלצים */
+.start-link{display:block;max-width:1200px;margin:16px auto 0;background:#fff;border-radius:14px;padding:12px 20px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);border-inline-start:5px solid var(--price);text-align:center}
+.start-link b{color:var(--title)}
+.start-link:hover{background:#fffaf0}
+@media (max-width:600px){.start-link{margin-top:10px;padding:10px 14px;font-size:.95rem}}
