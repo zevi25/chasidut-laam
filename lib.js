@@ -23,7 +23,9 @@ function orderLink(b){
 // כל הפריטים (סדרות וספרים) ברשימה אחת. img הוא המזהה של הספר, גם בכתובת של עמוד הספר (book.html?b=lemaan)
 const allItems = CATS.flatMap(c => [...(c.series || []).map(x => ({ ...x, cat:c, isSeries:true })), ...c.books.map(x => ({ ...x, cat:c }))]);
 const findItem = id => allItems.find(x => x.img === id);
-const bookUrl = b => "book.html?b=" + encodeURIComponent(b.img);
+// באתר החי לכל ספר יש עמוד קבוע (book-lemaan.html), כדי שבוואטסאפ ובגוגל יופיעו הכריכה והשם שלו. build.mjs בונה אותם ומדליק את BUILT
+var BUILT = true;
+const bookUrl = b => BUILT ? "book-" + encodeURIComponent(b.img) + ".html" : "book.html?b=" + encodeURIComponent(b.img);
 const short = c => c.title.replace("תניא - ", "");
 
 // סליקה: כשתחובר מערכת סליקה (למשל קארדקום), מדליקים כאן ומוסיפים לכל ספר payUrl, ובעמוד הספר יופיע כפתור "לתשלום מאובטח".

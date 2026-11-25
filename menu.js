@@ -54,6 +54,11 @@ html.menu-lock,html.menu-lock body{overflow:hidden}
     const sections = [{ id:"featured", title:"★ מומלצים" }, ...cats.map(c => ({ id:c.id, title:short(c) }))];
     const waText = encodeURIComponent("שלום, אשמח לקבל פרטים על ספרי הרב גרין");
 
+    // עמודים בלי תפריט קטגוריות משלהם (על הרב גרין, הצהרת נגישות) מקבלים את אותו תפריט כמו שאר האתר
+    const bar = top.querySelector(".nav");
+    if (bar && !bar.id && cats.length) bar.innerHTML = cats.map(c => '<a href="index.html#' + c.id + '">' + short(c) + '</a>').join("")
+      + '<a class="about-link' + (page === "about.html" ? ' on' : '') + '" href="about.html">על הרב גרין</a>';
+
     const btn = document.createElement("button");
     btn.className = "menu-btn"; btn.type = "button";
     btn.setAttribute("aria-label", "תפריט וקטגוריות"); btn.setAttribute("aria-expanded", "false"); btn.setAttribute("aria-controls", "menu-drawer");
