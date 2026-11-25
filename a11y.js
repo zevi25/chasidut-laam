@@ -59,6 +59,9 @@ html.a11y-still *,html.a11y-still *::before,html.a11y-still *::after{animation:n
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 .legal-links{margin-top:14px;font-size:0.875rem;display:flex;gap:6px 14px;justify-content:center;flex-wrap:wrap}
 .legal-links a{color:#5b6475}
+.foot .credit{margin-top:6px;font-size:0.8125rem;color:#5b6475}
+.foot .credit a{color:inherit;text-decoration:none;unicode-bidi:isolate;display:inline-block;padding:8px 2px}
+.foot .credit a:hover{text-decoration:underline}
 `;
   document.head.appendChild(css);
 
@@ -76,6 +79,8 @@ html.a11y-still *,html.a11y-still *::before,html.a11y-still *::after{animation:n
     const foot = document.querySelector("footer.foot");
     if (foot) foot.insertAdjacentHTML("beforeend",
       '<nav class="legal-links" aria-label="מידע משפטי">' + LEGAL.map(([href, label]) => '<a href="' + href + '">' + label + '</a>').join("") + '</nav>');
+    // קרדיט לבונה האתר, בתחתית כל עמוד
+    if (foot) foot.insertAdjacentHTML("beforeend", '<p class="credit">האתר נבנה על ידי <b>גרין דיגיטל</b> · <a href="tel:0545750471" dir="ltr">054-575-0471</a></p>');
 
     // תפריט נגישות
     const btn = document.createElement("button");
